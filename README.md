@@ -49,7 +49,7 @@ Organization (root/master)
 ## 2) Output of Directory struct following the above Org structure
 
 
-git clone https://github.com/flokinagee/terraform-ParallelResource-deploy.git
+git clone <this repoe>
 
 cd terraform-ParallelResource-deploy
 $ tree .

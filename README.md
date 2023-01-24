@@ -10,22 +10,40 @@
 # for example, assume the accouts are created as below
 
 Organization (root/master)
+
 ├───core (OU)
+
+
 │   ├───Automation (OU) #hold creds for automation terraform/jenkin
+
 │   │   ├───nonprod-automation  (NONPROD automation account)
+
 │   │   ├───prod-automation (PROD automation account)
+
 ├───workload (OU)
+
 │   ├───productions (OU) # containts production accounts
+
 │   │   ├───prod1  # (PROD production accounts1)
+
 │   │   ├───prod2  #(PROD production accounts2)
+
 │   ├───uat (OU) # containts UAT accounts
+
 │   │   ├───uat1  
+
 │   │   ├───uat2
+
 │   |---Sandbox (OU) # containts Sandbox accounts
+
 │   │   ├───sbx1
+
 │   │   ├───sbx2
+
 │   |---logging(OU) # containts Sandbox accounts
+
 │   │   ├───prod-log  # prod logging account
+
 │   │   ├───nprod-log # non-prod logging account
 
 ## 2) Output of Directory struct following the above Org structure

@@ -244,7 +244,7 @@ core  logging  ou_dep.hcl  parallel.hcl  providers.hcl  providers_acc.hcl  READM
 3) 
 $ find . -name *base.tf
 
-$
+$ terragrunt run-all init
 
 C:/Users/nagarajan/repos/multi/Organization/core/Automation/nonprod-automation nonprod-automation ../../../../parallel_deployment
 /c/Users/nagarajan/repos/multi/Organization/core/Automation/nonprod-automation

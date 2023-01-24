@@ -7,7 +7,7 @@
 
 ### 1) Terraform Directory structure follows the AWS Oraganization (Multi Accout Strategy), so the management and automation will be easy via terraform
 
-### for example, assume the accouts are created as below
+### for example, assume the accouts are created as below in AWS Organization
 
 Organization (root/master)
 
@@ -46,7 +46,7 @@ Organization (root/master)
 
 │   │   ├───nprod-log # non-prod logging account
 
-### 2) Output of Directory struct following the above Org structure
+### 2) Created the directory structure in Terraform similar as above Org structure to simplify the automation.
 
 
 clone this repo
@@ -93,9 +93,18 @@ $ tree .
 
 
 
-### 3) create/update account.hcl with your account name and number. I create the dictotry name similar to account name to simply/manage efficiently the terraform modules to distinguish
+### 3) create / update "account.hcl" with your account name and number in the root directory. 
 
 ### maintaing the directory structure with AWs Org Struction will give us space for a lot of automation to generate dynamic approtiate resorources. It will be explained below
+
+NagarajansMBP2:terraform-multi-account-parallel-deployment nagarajan$ pwd
+
+/Users/nagarajan/repos/terraform-multi-account-parallel-deployment
+
+NagarajansMBP2:terraform-multi-account-parallel-deployment nagarajan$ ls -l accounts.hcl 
+
+-rw-r--r--  1 nagarajan  staff  319 Jan 24 17:23 accounts.hcl
+
 
 cat accounts.hcl
 
@@ -124,7 +133,11 @@ inputs = {
 }
 
 
-### 4) Refer the parallel_deployment. Created "env.json" to distinguish the environment. So the resoruce can be created specific to the environment. Under 
+### 4) Refer the parallel_deployment direcoty in the root. Created "env.json" to distinguish the environment. So the resoruce can be created specific to the environment. 
+
+NagarajansMBP2:terraform-multi-account-parallel-deployment nagarajan$ cd parallel_deployment/
+
+NagarajansMBP2:parallel_deployment nagarajan$ cat env.json 
 
 {
 
@@ -151,7 +164,7 @@ inputs = {
 }
 
 ### 5) If you want to create resources in all account, place your tf file under parallel_deployment/all_accounts. If for prod accounts only, place your file under parallel_deployment/prod and for nonprod accounts only parallel_deployment/nonprod. 
-## In this excersize lets create the iam resource on all account 
+### In this excersize lets create the iam resource on all account 
 
 cd parallel_deployment/all_accounts
 
@@ -165,13 +178,20 @@ all_iam_base.tf         outputs_base.tf         variables_base.tf
 from parallel_deployment/all_accounts
 
 to
+
 core/Automation/nonprod-automation, prod-automation
+
 wordload/porudtions/prod1 prod2
+
+
 wordload/uat/uat1 uat2
+
 wordload/sandbox/sbx1 sbx2
+
 wordload/logging/prod-log, nprod-log
 
 ## under the hood ##
+
 terragrunt looks for "terragrunt.hcl" file in all the directory resursively and load the file.
 
 one of the directive in terragrunt.hcl is
@@ -185,7 +205,7 @@ terragrunt executes the file in "Organization/resource_deployment.hcl" i which e
 
 The scrips then copy the file from central location parallel_deployment/all_accounts to all accounts directory
 
-NagarajansMBP2:nonprod-automation mahaakutty$ ls -l *base*
+NagarajansMBP2:nonprod-automation nagarajan$ ls -l *base*
 
 -rw-r--r--  1 NagarajansMBP2  staff  634 14 Jul  2022 all_iam_base.tf
 
@@ -202,8 +222,8 @@ NagarajansMBP2:nonprod-automation NagarajansMBP2$
 
 ### if you want perform individual resource creation, go the account directory and run terragrunt init/plan/apply/destrouy 
 
-NagarajansMBP2:terraform-ParallelResoruce-deploy mahaakutty$ cd Organization/core/Automation/nonprod-automation
-NagarajansMBP2:nonprod-automation mahaakutty$ terragrunt plan
+NagarajansMBP2:terraform-ParallelResoruce-deploy nagarajan$ cd Organization/core/Automation/nonprod-automation
+NagarajansMBP2:nonprod-automation nagarajan$ terragrunt plan
 
 This  will load the terragrunt.hcl file in the local directory and get the file from central location and create it
 

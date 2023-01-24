@@ -49,7 +49,7 @@ Organization (root/master)
 ## 2) Output of Directory struct following the above Org structure
 
 
-git clone <this repo>
+clone this repo
 
 cd terraform-ParallelResource-deploy
 $ tree .
@@ -212,7 +212,7 @@ You can create addional local file if you want such creating bucket s3.tf on thi
 
 ## DEMO ###
 
-1) $git <this repo>
+1) $ clone this repo
 
 2)
 $cd terraform-ParallelResource-deploy

@@ -1,13 +1,13 @@
-### Create Parallel/multi resources in multiple account using terraform
+# Create Parallel / multiple resources in multiple AWS account using terraform
 
-### We use Terragrunt to manage multiple terraform modules 
-## Terragrunt is a thin wrapper that provides extra tools for keeping your configurations DRY, working with multiple Terraform modules, and managing remote state.  https://terragrunt.gruntwork.io/
+## We use Terragrunt to manage multiple terraform modules 
+### Terragrunt is a thin wrapper that provides extra tools for keeping your configurations DRY, working with multiple Terraform modules, and managing remote state.  https://terragrunt.gruntwork.io/
 
 ### How to ###
 
-## 1) Terraform Directory structure follows the AWS Oraganization (Multi Accout Strategy), so the management and automation will be easy via terraform
+### 1) Terraform Directory structure follows the AWS Oraganization (Multi Accout Strategy), so the management and automation will be easy via terraform
 
-# for example, assume the accouts are created as below
+### for example, assume the accouts are created as below
 
 Organization (root/master)
 
@@ -46,7 +46,7 @@ Organization (root/master)
 
 │   │   ├───nprod-log # non-prod logging account
 
-## 2) Output of Directory struct following the above Org structure
+### 2) Output of Directory struct following the above Org structure
 
 
 clone this repo
@@ -93,9 +93,9 @@ $ tree .
 
 
 
-## 3) create/update account.hcl with your account name and number. I create the dictotry name similar to account name to simply/manage efficiently the terraform modules to distinguish
+### 3) create/update account.hcl with your account name and number. I create the dictotry name similar to account name to simply/manage efficiently the terraform modules to distinguish
 
-# maintaing the directory structure with AWs Org Struction will give us space for a lot of automation to generate dynamic approtiate resorources. It will be explained below
+### maintaing the directory structure with AWs Org Struction will give us space for a lot of automation to generate dynamic approtiate resorources. It will be explained below
 
 cat accounts.hcl
 
@@ -124,7 +124,7 @@ inputs = {
 }
 
 
-## 4) Refer the parallel_deployment. Created "env.json" to distinguish the environment. So the resoruce can be created specific to the environment. Under 
+### 4) Refer the parallel_deployment. Created "env.json" to distinguish the environment. So the resoruce can be created specific to the environment. Under 
 
 {
 
@@ -150,7 +150,7 @@ inputs = {
 
 }
 
-## 5) If you want to create resources in all account, place your tf file under parallel_deployment/all_accounts. If for prod accounts only, place your file under parallel_deployment/prod and for nonprod accounts only parallel_deployment/nonprod. 
+### 5) If you want to create resources in all account, place your tf file under parallel_deployment/all_accounts. If for prod accounts only, place your file under parallel_deployment/prod and for nonprod accounts only parallel_deployment/nonprod. 
 ## In this excersize lets create the iam resource on all account 
 
 cd parallel_deployment/all_accounts
@@ -198,9 +198,9 @@ NagarajansMBP2:nonprod-automation NagarajansMBP2$ pwd
 NagarajansMBP2:nonprod-automation NagarajansMBP2$
 
 
-## Terragrunt run-all apply will create the resource then
+### Terragrunt run-all apply will create the resource then
 
-## if you want perform individual resource creation, go the account directory and run terragrunt init/plan/apply/destrouy 
+### if you want perform individual resource creation, go the account directory and run terragrunt init/plan/apply/destrouy 
 
 NagarajansMBP2:terraform-ParallelResoruce-deploy mahaakutty$ cd Organization/core/Automation/nonprod-automation
 NagarajansMBP2:nonprod-automation mahaakutty$ terragrunt plan

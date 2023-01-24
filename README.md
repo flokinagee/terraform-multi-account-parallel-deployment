@@ -55,23 +55,41 @@ cd terraform-ParallelResource-deploy
 $ tree .
 
 ├───core
+
 │   └───Automation
+
 │       ├───nonprod-automation
+
 │       └───prod-automation
+
 ├───logging
+
 │   ├───nprod-log
+
 │   └───prod-log
+
 └───workload
+
     ├───productions
+
     │   ├───prod1
+
     │   └───prod2
+
     ├───Sandbox
+
     │   ├───sbx1
+
     │   └───sbx2
+
     └───uat
+
         ├───.terragrunt-cache
+
         ├───uat1
+
         └───uat2
+
 
 
 
@@ -82,38 +100,63 @@ $ tree .
 cat accounts.hcl
 
 inputs = {
-    nonprod-automation = "219328002342"
-    prod-automation = "013768294884"
-    prod1 = "137493645844"
-    prod2 = "107422976801"
-    uat1 = "549803830220"
-    uat2 = "885231250983"
-    sbx1 = "032640307138"
-    sbx2 = "161110923832"
-    prod-log = "441485543672"
-    nprod-log = "787543711177"
+
+    nonprod-automation = "012345678901"
+
+    prod-automation = "012345678901"
+
+    prod1 = "012345678901"
+
+    prod2 = "012345678901"
+
+    uat1 = "012345678901"
+
+    uat2 = "012345678901"
+
+    sbx1 = "012345678901"
+
+    sbx2 = "012345678901"
+
+    prod-log = "012345678901"
+
+    nprod-log = "012345678901"
+
 }
+
 
 ## 4) Refer the parallel_deployment. Created "env.json" to distinguish the environment. So the resoruce can be created specific to the environment. Under 
 
 {
+
     "nonprod-automation" :"nonprod",
+
     "uat1" :"nonprod",
+
     "uat2" :"nonprod",
+
     "sbx1" :"nonprod",
+
     "sbx2" :"nonprod",
+
     "nprod-log": "nonprod",
+
     "prod-automation" :"prod",
+
     "prod1" :"prod",
+
     "prod2" :"prod",
+
     "prod-log": "prod"
+
 }
 
 ## 5) If you want to create resources in all account, place your tf file under parallel_deployment/all_accounts. If for prod accounts only, place your file under parallel_deployment/prod and for nonprod accounts only parallel_deployment/nonprod. 
 ## In this excersize lets create the iam resource on all account 
 
-cd parallel_deployment/all_accounts.
+cd parallel_deployment/all_accounts
+
 NagarajansMBP2:all_accounts $ ls
+
 all_iam_base.tf         outputs_base.tf         variables_base.tf
 
 
@@ -143,9 +186,13 @@ terragrunt executes the file in "Organization/resource_deployment.hcl" i which e
 The scrips then copy the file from central location parallel_deployment/all_accounts to all accounts directory
 
 NagarajansMBP2:nonprod-automation mahaakutty$ ls -l *base*
+
 -rw-r--r--  1 NagarajansMBP2  staff  634 14 Jul  2022 all_iam_base.tf
+
 -rw-r--r--  1 NagarajansMBP2  staff  121 14 Jul  2022 outputs_base.tf
+
 -rw-r--r--  1 NagarajansMBP2  staff  217 14 Jul  2022 variables_base.tf
+
 NagarajansMBP2:nonprod-automation NagarajansMBP2$ pwd
 /Users/NagarajansMBP2/repos/terraform-ParallelResoruce-deploy/Organization/core/Automation/nonprod-automation
 NagarajansMBP2:nonprod-automation NagarajansMBP2$
@@ -169,6 +216,7 @@ You can create addional local file if you want such creating bucket s3.tf on thi
 
 2)
 $cd terraform-ParallelResource-deploy
+
 $ls
 core  logging  ou_dep.hcl  parallel.hcl  providers.hcl  providers_acc.hcl  README.md  resource_deployment.hcl  state.hcl  tf.hcl  workload
 
@@ -180,69 +228,75 @@ $
 
 C:/Users/nagarajan/repos/multi/Organization/core/Automation/nonprod-automation nonprod-automation ../../../../parallel_deployment
 /c/Users/nagarajan/repos/multi/Organization/core/Automation/nonprod-automation
+
 coping files from ../../../../parallel_deployment/all_accounts to C:/Users/nagarajan/repos/multi/Organization/core/Automation/nonprod-automation
 Copy environment spec files
+
 C:/Users/nagarajan/repos/multi/Organization/core/Automation/prod-automation prod-automation ../../../../parallel_deployment
 /c/Users/nagarajan/repos/multi/Organization/core/Automation/prod-automation
 coping files from ../../../../parallel_deployment/all_accounts to C:/Users/nagarajan/repos/multi/Organization/core/Automation/prod-automation
 Copy environment spec files
+
 C:/Users/nagarajan/repos/multi/Organization/logging/nprod-log nprod-log ../../../parallel_deployment
 /c/Users/nagarajan/repos/multi/Organization/logging/nprod-log
 coping files from ../../../parallel_deployment/all_accounts to C:/Users/nagarajan/repos/multi/Organization/logging/nprod-log
 Copy environment spec files
+
 C:/Users/nagarajan/repos/multi/Organization/logging/prod-log prod-log ../../../parallel_deployment
 /c/Users/nagarajan/repos/multi/Organization/logging/prod-log
 coping files from ../../../parallel_deployment/all_accounts to C:/Users/nagarajan/repos/multi/Organization/logging/prod-log
 Copy environment spec files
+
 C:/Users/nagarajan/repos/multi/Organization/workload/Sandbox/sbx1 sbx1 ../../../../parallel_deployment
 /c/Users/nagarajan/repos/multi/Organization/workload/Sandbox/sbx1
 coping files from ../../../../parallel_deployment/all_accounts to C:/Users/nagarajan/repos/multi/Organization/workload/Sandbox/sbx1
 Copy environment spec files
+
 C:/Users/nagarajan/repos/multi/Organization/workload/Sandbox/sbx2 sbx2 ../../../../parallel_deployment
 /c/Users/nagarajan/repos/multi/Organization/workload/Sandbox/sbx2
 coping files from ../../../../parallel_deployment/all_accounts to C:/Users/nagarajan/repos/multi/Organization/workload/Sandbox/sbx2
 Copy environment spec files
+
 C:/Users/nagarajan/repos/multi/Organization/workload/productions/prod1 prod1 ../../../../parallel_deployment
 /c/Users/nagarajan/repos/multi/Organization/workload/productions/prod1
 coping files from ../../../../parallel_deployment/all_accounts to C:/Users/nagarajan/repos/multi/Organization/workload/productions/prod1
 Copy environment spec files
+
 ...
+
 ....
+
 $
 
 4
 
 $ find . -name *base.tf
+
 ./core/Automation/nonprod-automation/all_iam_base.tf
+
 ./core/Automation/nonprod-automation/outputs_base.tf
+
 ./core/Automation/nonprod-automation/variables_base.tf
+
 ./core/Automation/prod-automation/all_iam_base.tf
+
 ./core/Automation/prod-automation/outputs_base.tf
+
 ./core/Automation/prod-automation/variables_base.tf
+
 ./logging/nprod-log/all_iam_base.tf
+
 ./logging/nprod-log/outputs_base.tf
+
 ./logging/nprod-log/variables_base.tf
+
 ./logging/prod-log/all_iam_base.tf
+
 ./logging/prod-log/outputs_base.tf
-./logging/prod-log/variables_base.tf
-./workload/productions/prod1/all_iam_base.tf
-./workload/productions/prod1/outputs_base.tf
-./workload/productions/prod1/variables_base.tf
-./workload/productions/prod2/all_iam_base.tf
-./workload/productions/prod2/outputs_base.tf
-./workload/productions/prod2/variables_base.tf
-./workload/Sandbox/sbx1/all_iam_base.tf
-./workload/Sandbox/sbx1/outputs_base.tf
-./workload/Sandbox/sbx1/variables_base.tf
-./workload/Sandbox/sbx2/all_iam_base.tf
-./workload/Sandbox/sbx2/outputs_base.tf
-./workload/Sandbox/sbx2/variables_base.tf
-./workload/uat/uat1/all_iam_base.tf
-./workload/uat/uat1/outputs_base.tf
-./workload/uat/uat1/variables_base.tf
-./workload/uat/uat2/all_iam_base.tf
-./workload/uat/uat2/outputs_base.tf
-./workload/uat/uat2/variables_base.tf
+
+....
+
+....
 
 5) terragrunt run-all apply --> to create the resource
 
